@@ -3,7 +3,7 @@
 
   tasks:
     - name: Install some packages
-      packages:
+      package:
         name: |
           chromium,
           brave-browser,
