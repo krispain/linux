@@ -15,7 +15,7 @@
           simple-scan,
           atril,
           gnome-calculator,
-          gvfs-mtp,
+          {{ mtp }},
           ifuse,
           libimobiledevice-utils,
           usbmuxd,

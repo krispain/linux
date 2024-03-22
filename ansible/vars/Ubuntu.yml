@@ -1,2 +1,2 @@
 # for vars/Ubuntu.yml
-chromium: chromium-browser
+mtp: libmtp-common
