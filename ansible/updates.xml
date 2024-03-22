@@ -2,20 +2,6 @@
 - hosts: localhost
 
   tasks:
-    - name: Check packages to upgrade
-      package:
-        list: updates
-      register: packages
-
-    - name: Show packages to upgrade
-      debug:
-        msg: >-
-          {%- set output=[] -%}
-          {%- for p in packages.results -%}
-          {{ output.append('%-40s' % (p.name ~ '-' ~ p.version) ~ ' | repo: ' ~ p.repo) }}
-          {%- endfor -%}
-          {{ output }}
-
     - name: Update all pacakges
       package:
         name: "*"
