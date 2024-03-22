@@ -1,0 +1,36 @@
+---
+- hosts: localhost
+
+  tasks:
+    - name: Check packages to upgrade
+      dnf:
+        list: updates
+      register: packages
+
+    - name: Show packages to upgrade
+      debug:
+        msg: >-
+          {%- set output=[] -%}
+          {%- for p in packages.results -%}
+          {{ output.append('%-40s' % (p.name ~ '-' ~ p.version) ~ ' | repo: ' ~ p.repo) }}
+          {%- endfor -%}
+          {{ output }}
+
+    - name: Update all pacakges
+      dnf:
+        name: "*"
+        state: latest
+      register: result
+    - name: Show updated packages
+      when: result is changed
+      debug: msg="{{ result.results }}"
+
+    - name: Upgrade all flatpaks
+      ansible.builtin.command: 
+        flatpak update --noninteractive
+      register: result
+      changed_when: "'Nothing to do' not in result.stdout"
+    - name: Show updated flatpaks
+      when: result is changed
+      debug: msg="{{ result.stdout_lines }}"
+

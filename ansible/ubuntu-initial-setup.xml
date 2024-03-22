@@ -1,0 +1,73 @@
+---
+- hosts: localhost
+
+  tasks:
+    - name: Get Ubuntu Version
+      command: "lsb_release -r -s"
+      register: fedora_version
+
+    - name: Update all pacakges
+      package:
+        name: "*"
+        state: latest
+
+    - name: Adding Brave browser repo
+      become: yes
+      ansible.builtin.command: echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+
+    - name: Importing Brave browser key
+      become: yes
+      ansible.builtin.command: curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+
+    - name: add prompt script
+      copy:
+        src: prompt.sh
+        dest: /etc/profile.d/prompt.sh
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: add aliases script
+      copy:
+        src: aliases.sh
+        dest: /etc/profile.d/aliases.sh
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: add environment script
+      copy:
+        src: environment.sh
+        dest: /etc/profile.d/environment.sh
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: Install /etc/hosts file
+      copy:
+        src: hosts
+        dest: /etc/hosts
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: Mount home NFS volumes with noauto according to boot option
+      ansible.posix.mount:
+        src: 172.16.1.74:/nfs/WDNFS
+        path: /mnt/WDNFS
+        opts: x-systemd.automount,x-systemd.idle-timeout=600
+        boot: false
+        state: mounted
+        fstype: nfs
+
+    - name: Install flatpak
+      package:
+        name: flatpak-builder
+
+    - name: Add the flathub flatpak repository remote to the user installation
+      community.general.flatpak_remote:
+        name: flathub
+        state: present
+        flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+        method: system
+

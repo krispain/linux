@@ -1,0 +1,253 @@
+# Install from a minimal server install
+Select: "Fedora Custom Operating System"
+	Add "Standard"
+
+Encrypted disk
+
+Set hostname under "Network and Host Name"
+Configure network if needed
+
+Enable root account, allow ssh
+Add user, Administrator (defaul)
+
+
+
+Install Ansible core and git
+
+dnf -y install ansible git
+
+git clone https://github.com/krispain/fedora.git
+
+cd fedora/ansible
+
+# setup repos etc, one time stuff:
+ansbile-playbook initial-setup.xml
+
+# Updates
+ansbile-playbook updates.xml
+
+# install packages etc, will be run over and over
+ansbile-playbook base.xml
+
+systemctl set-default graphical.target
+systemctl enable lightdm.service
+
+reboot
+
+Login - Select 'Gnome Flashback" session
+
+# Add persistent gnome-flashback shortcuts
+
+Drag/drop:
+Brave
+Mate Terminal
+
+Add to Panel -> System Monitor
+	-> configure 
+
+
+# Accessories -> Tweaks -> Windows -> Focus on Hover
+# Accessories -> Tweaks -> Window Titlebars -> Double Click -> "Maximize Vertically"
+# Accessories -> Tweaks -> Window Titlebars -> Middle Click -> "Lower"
+# Mate Terminal Prefernces -> Edit -> Profile Preferences" -> Scrolling -> Unlimited
+#							   -> Colours -> "White on Black"
+# 							   -> Title and Command -> "Replace initial title"
+
+
+Chris Payne -> Settings -> Keyboard -> Keyboard Shortcuts -> View and Customize Shortcus -> Custom Shortcuts -> Add Shortcut
+Name:		Mate Screenshot
+Command:	/usr/bin/mate-screenshot -w
+Shortcut: 	Fn-Printscreen
+Replace
+
+Chris Payne -> Settings -> Default Apps
+Photos -> Eye of MATE
+
+
+Add seconds to clock
+Add locations
+	Vernon
+	Zurich
+	Dublin
+	Ithaca
+	Saskatoon
+
+# Manual commands to run/setup
+authy
+bitwarden
+protonvpn-cli login cpayne
+ssh-keygen -t ed25519
+nextcloud		https://nextcloud.skierswithoutboarders.com
+signal
+telegram
+
+# Setup Brave
+# Sync from another device
+# Change search to startpage.com
+# Start where you left off
+# Wide address bar
+# always show full url
+
+# Some useful links to install stuff
+# Bitwarden brave addon
+https://chrome.google.com/webstore/detail/bitwarden-free-password-m/nngceckbapebfimnlniiiahkandclblb
+
+
+# Very specific Chris things
+# link nextcloud Documents
+
+cd /home/cpayne
+rmdir Documents && ln -s Nextcloud/Documents
+rmdir Music && ln -s Nextcloud/Music
+ln -s Nextcloud/bin
+
+# on personal link Music to host
+rmdir Music && ln -s shared/Music
+
+
+# Setup a couple ssh connections
+
+ssh-copy-id 172.16.1.71 # pi4 in house
+# as root on pi4 do:
+tail -n 1 /home/cpayne/.ssh/authorized_keys >> /root/.ssh/authorized_keys
+ssh-copy-id housing.krispain.com # Zurich
+# as root on housing do:
+tail -n 1 /home/cpayne/.ssh/authorized_keys >> /root/.ssh/authorized_keys
+
+Add ssh key to github account via web interface
+
+mkdir ~/github && cd ~/github
+git clone git@github.com:krispain/fedora.git
+git clone git@github.com:krispain/nixos.git
+
+ 
+# for nine VPN, download config files from protondrive
+rename to be interface names
+connect using
+wg-quick up <interface>.conf
+
+
+
+
+
+
+2023/11/02
+
+Solved xorg QEMU VM issue:
+https://ubuntuforums.org/showthread.php?t=2486167&p=14158211#post14158211
+
+- Changing the video driver from "QXL" to "Virtio"
+- Enabling 3D acceleration
+- (Click "Apply")
+- Enabling OpenGL in the "Display Spice" tab
+- Setting "Listen type" to "None" (same tab)
+- (Click "Apply" again)
+
+
+2024/02/16
+
+Setting up wiregard VPN, use script from work
+
+conf file needs to be in 
+/home/cpayne/Download/WireGuard.conf 
+then run
+sh nm_config_wg_nine.sh
+
+
+It then shows in Network Manager and connects fine
+
+
+2024/02/20
+
+RMM:
+Need to downgrade openvpn in order to connect, error:
+
+2024-02-20 07:03:08 OpenSSL: error:0A00018F:SSL routines::ee key too small:
+
+Get old RPM from :
+
+https://rpm.pbone.net/info_idpl_80034947_distro_fedora33_com_openvpn-2.4.11-1.fc33.x86_64.rpm.html
+
+wget ftp://ftp.pbone.net/mirror/archive.fedoraproject.org/fedora/linux/updates/33/Everything/x86_64/Packages/o/openvpn-2.4.11-1.fc33.x86_64.rpm 
+
+Install:
+
+dnf downgrade ./openvpn-2.4.11-1.fc33.x86_64.rpm 
+
+Version Lock:
+
+dnf install 'dnf-command(versionlock)'
+dnf versionlock openvpn
+
+
+[root@thinkpad-fedora:~/fedora/ansible ]$ dnf versionlock openvpn
+Last metadata expiration check: 2:05:56 ago on Tue 20 Feb 2024 06:46:59 AM PST.
+Adding versionlock on: openvpn-0:2.4.11-1.fc33.*
+[root@thinkpad-fedora:~/fedora/ansible ]$ 
+
+
+Manually add a couple aliases for root to connect
+
+
+2024/02/20
+
+To run the old java consoles, this is what is needed:
+
+Firefox needs a downgrade for old RMMs
+
+mkdir -p /home/cpayne/firefox-esr && cd /home/cpayne/firefox-esr
+wget -O firefox-esr.tar.bz2 "https://download.mozilla.org/?product=firefox-esr-latest-ssl&os=linux64&lang=en-US"
+bunzip firefox-esr.tar.bz2
+tar -xvf firefox-esr.tar
+cd /home/cpayne/bin
+ln -s /home/cpayne/firefox-esr/firefox/firefox 
+
+
+Setup Firefox to connect to them by
+
+about:config
+
+security.tls.version.min	1
+
+Edit:
+
+Using this:
+
+/usr/bin/javaws -J-Djava.security.debug=properties jviewer.jnlp
+
+determine this file needs to have a couple removed:
+
+/etc/crypto-policies/back-ends/java.config
+
+[root@thinkpad-fedora:~/fedora/ansible ]$ diff /etc/crypto-policies/back-ends/java.config /etc/crypto-policies/back-ends/java.config.orig
+2c2
+< jdk.tls.disabledAlgorithms=DH keySize < 2048, SSLv3, SSLv2, DHE_DSS, RSA_EXPORT, DHE_DSS_EXPORT, DHE_RSA_EXPORT, DH_DSS_EXPORT, DH_RSA_EXPORT, DH_anon, ECDH_anon, DH_RSA, DH_DSS, ECDH, 3DES_EDE_CBC, DES_CBC, RC4_40, RC4_128, DES40_CBC, RC2, HmacMD5
+---
+> jdk.tls.disabledAlgorithms=DH keySize < 2048, TLSv1.1, TLSv1, SSLv3, SSLv2, DHE_DSS, RSA_EXPORT, DHE_DSS_EXPORT, DHE_RSA_EXPORT, DH_DSS_EXPORT, DH_RSA_EXPORT, DH_anon, ECDH_anon, DH_RSA, DH_DSS, ECDH, 3DES_EDE_CBC, DES_CBC, RC4_40, RC4_128, DES40_CBC, RC2, HmacMD5
+[root@thinkpad-fedora:~/fedora/ansible ]$ 
+
+
+and now they just will run from the firefox download folder.
+
+
+
+2024/02/26
+
+ssh access via cloudflare to house, package added, configure ssh client:
+echo "host coldstream.krispain.com
+	ProxyCommand /usr/local/bin/cloudflared access ssh --hostname %h
+" >> /home/cpayne/.ssh/config
+
+
+
+2024/03/12
+
+https://discussion.fedoraproject.org/t/fedora-stopped-detecting-internal-laptop-microphone/73839
+To get internal microphone working on thinkpad, had to swap:
+
+dnf swap wireplumber pipewire-media-session
+
+2024/03/15
+Had to switch back
+dnf swap pipewire-media-session wireplumber 
+

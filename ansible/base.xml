@@ -1,0 +1,88 @@
+---
+- hosts: localhost
+
+  tasks:
+    - name: Install some packages
+      dnf:
+        name: |
+          chromium,
+          brave-browser,
+          firefox,
+          shotwell,
+          libreoffice,
+          cups,
+          simple-scan,
+          atril,
+          gnome-calculator,
+          gvfs-mtp,
+          ifuse,
+          libimobiledevice-utils,
+          usbmuxd,
+          mate-terminal,
+          neofetch,
+          htop,
+          ncdu,
+          et,
+          android-tools,
+          tigervnc,
+          docker-compose,
+          virt-manager,
+          mosh,
+          rclone,
+          nmap,
+          meld,
+          openvpn,
+          glxinfo,
+          gparted,
+          gimp,
+          mate-utils,
+          eom,
+          audacity,
+          sox,
+          vlc,
+          mplayer,
+          yt-dlp,
+          id3v2,
+          lame,
+          id3lib,
+          mp3gain,
+          alsa-sof-firmware,
+          pavucontrol,
+          pulseaudio-utils,
+          intel-audio-firmware,
+          gnome-tweaks,
+          protonvpn,
+          qbittorrent,
+          gnome-flashback,
+          lightdm,
+          normalize,
+          nextcloud-client-nautilus,
+          iwlwifi-mvm-firmware,
+          iwlwifi-dvm-firmware,
+          icedtea-web,
+          default-fonts,
+          default-fonts-core,
+          fzf,
+          bat,
+          fd-find
+
+    - name: Install flatpak packages
+      community.general.flatpak:
+        name:
+          - com.slack.Slack
+          - com.authy.Authy
+          - com.bitwarden.desktop
+          - org.signal.Signal
+          - org.telegram.desktop
+
+    - name: Install linphone appimage
+      ansible.builtin.get_url:
+        url: https://linphone.org/releases/linux/latest_app
+        dest: /usr/local/bin/linphone
+        mode: '0755'
+
+    - name: Install Protonmail Desktop App
+      dnf:
+        name: "https://proton.me/download/mail/linux/ProtonMail-desktop-beta.rpm"
+        disable_gpg_check: true
+        state: present

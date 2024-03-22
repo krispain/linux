@@ -1,0 +1,111 @@
+---
+- hosts: localhost
+
+  tasks:
+    - name: Get Fedora Version
+      command: "rpm -E %fedora"
+      register: fedora_version
+
+    - name: Update all pacakges
+      dnf:
+        name: "*"
+        state: latest
+
+    - name: Importing RPM Fusion (free) key
+      become: yes
+      ansible.builtin.rpm_key:
+        state: present
+        key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020
+
+    - name: Importing RPM (non-free) key
+      become: yes
+      ansible.builtin.rpm_key:
+        state: present
+        key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020
+
+    - name: Install RPM Fusion Free
+      dnf:
+        name: "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_version.stdout }}.noarch.rpm"
+        state: present
+
+    - name: Install RPM Fusion NonFree
+      dnf:
+        name: "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_version.stdout }}.noarch.rpm"
+        state: present
+
+    - name: Install protonvpn repo
+      dnf:
+        name: "https://repo.protonvpn.com/fedora-{{ fedora_version.stdout }}-stable/protonvpn-stable-release/protonvpn-stable-release-1.0.1-2.noarch.rpm"
+        disable_gpg_check: true
+        state: present
+
+    - name: Install cloudflared
+      dnf:
+        name: "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-x86_64.rpm"
+        disable_gpg_check: true
+        state: present
+
+    - name: Install dnf plugins
+      dnf:
+        name: dnf-plugins-core
+
+    - name: Adding Brave browser repo
+      become: yes
+      ansible.builtin.command: dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/
+
+    - name: Importing Brave browser key
+      become: yes
+      ansible.builtin.command: rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+
+    - name: add prompt script
+      copy:
+        src: prompt.sh
+        dest: /etc/profile.d/prompt.sh
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: add aliases script
+      copy:
+        src: aliases.sh
+        dest: /etc/profile.d/aliases.sh
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: add environment script
+      copy:
+        src: environment.sh
+        dest: /etc/profile.d/environment.sh
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: Install /etc/hosts file
+      copy:
+        src: hosts
+        dest: /etc/hosts
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: Mount home NFS volumes with noauto according to boot option
+      ansible.posix.mount:
+        src: 172.16.1.74:/nfs/WDNFS
+        path: /mnt/WDNFS
+        opts: x-systemd.automount,x-systemd.idle-timeout=600
+        boot: false
+        state: mounted
+        fstype: nfs
+
+    - name: Install flatpak
+      dnf:
+        name: flatpak-builder
+
+    - name: Add the flathub flatpak repository remote to the user installation
+      community.general.flatpak_remote:
+        name: flathub
+        state: present
+        flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+        method: system
+
