@@ -1,6 +1,4 @@
 # Install from a minimal server install
-Select: "Fedora Custom Operating System"
-	Add "Standard"
 
 Encrypted disk
 
@@ -8,17 +6,18 @@ Set hostname under "Network and Host Name"
 Configure network if needed
 
 Enable root account, allow ssh
-Add user, Administrator (defaul)
-
+Add user, Administrator (default)
 
 
 Install Ansible core and git
 
 dnf -y install ansible git
+OR
+apt install ansible git
 
-git clone https://github.com/krispain/fedora.git
+git clone https://github.com/krispain/linux.git
 
-cd fedora/ansible
+cd linux/ansible
 
 # setup repos etc, one time stuff:
 ansbile-playbook initial-setup.xml

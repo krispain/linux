@@ -17,7 +17,9 @@
 
     - name: Importing Brave browser key
       become: yes
-      ansible.builtin.command: curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+      get_url: 
+        url: https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+        dest: /usr/share/keyrings/brave-browser-archive-keyring.gpg 
 
     - name: add prompt script
       copy:
@@ -50,6 +52,11 @@
         owner: root
         group: root
         mode: 0644
+
+    - name: Install NFS tools
+      package:
+        name: "nfs-common"
+        state: latest
 
     - name: Mount home NFS volumes with noauto according to boot option
       ansible.posix.mount:
