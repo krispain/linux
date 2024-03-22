@@ -3,7 +3,7 @@
 
   tasks:
     - name: Check packages to upgrade
-      dnf:
+      package:
         list: updates
       register: packages
 
@@ -17,7 +17,7 @@
           {{ output }}
 
     - name: Update all pacakges
-      dnf:
+      package:
         name: "*"
         state: latest
       register: result

@@ -20,7 +20,7 @@ git clone https://github.com/krispain/linux.git
 cd linux/ansible
 
 # setup repos etc, one time stuff:
-ansbile-playbook initial-setup.xml
+ansbile-playbook [fedora|ubuntu]-initial-setup.xml
 
 # Updates
 ansbile-playbook updates.xml
