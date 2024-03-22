@@ -3,7 +3,7 @@
 
   tasks:
     - name: Install some packages
-      dnf:
+      packages:
         name: |
           chromium,
           brave-browser,
@@ -81,8 +81,8 @@
         dest: /usr/local/bin/linphone
         mode: '0755'
 
-    - name: Install Protonmail Desktop App
-      dnf:
-        name: "https://proton.me/download/mail/linux/ProtonMail-desktop-beta.rpm"
-        disable_gpg_check: true
-        state: present
+#     - name: Install Protonmail Desktop App
+#       dnf:
+#         name: "https://proton.me/download/mail/linux/ProtonMail-desktop-beta.rpm"
+#         disable_gpg_check: true
+#         state: present
