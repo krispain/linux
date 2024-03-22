@@ -1,11 +1,13 @@
 ---
 - hosts: localhost
+  vars_files:
+    - [ "vars/{{ ansible_facts['distribution'] }}.yml"]
 
   tasks:
     - name: Install some packages
       package:
         name: |
-          chromium,
+          '{{ chromium }}',
           brave-browser,
           firefox,
           shotwell,
