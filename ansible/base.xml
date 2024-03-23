@@ -68,9 +68,6 @@
     - name: Install flatpak package Slack
       community.general.flatpak:
         name: com.slack.Slack
-    - name: Install flatpak package Authy
-      community.general.flatpak:
-        name: com.authy.Authy
     - name: Install flatpak package bitwarden
       community.general.flatpak:
         name: com.bitwarden.desktop
