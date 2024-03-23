@@ -6,7 +6,7 @@ glxinfo: mesa-utils
 id3lib: libid3-tools
 alsasoffirmware: firmware-sof-signed
 intelaudiofirmware: firmware-sof-signed
-gnomeflashback: gnome-session-flashback
+gnomeflashback: 'gnome-session-flashback gnome-session'
 nextcloudclientnautilus: nextcloud-desktop
 iwlwifimvmfirmware: linux-modules-iwlwifi-generic
 iwlwifidvmfirmware: linux-modules-iwlwifi-generic
