@@ -11,3 +11,5 @@ nextcloudclientnautilus: nextcloud-client-nautilus
 iwlwifimvmfirmware: iwlwifi-mvm-firmware
 iwlwifidvmfirmware: iwlwifi-dvm-firmware
 icedteaweb: icedtea-web
+defaultfonts: default-fonts
+defaultfontscore: default-fonts-core

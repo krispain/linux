@@ -10,3 +10,5 @@ nextcloudclientnautilus: nextcloud-desktop
 iwlwifimvmfirmware: linux-modules-iwlwifi-generic
 iwlwifidvmfirmware: linux-modules-iwlwifi-generic
 icedteaweb: icedtea-netx
+defaultfonts: fonts-ubuntu
+defaultfontscore: fonts-ubuntu

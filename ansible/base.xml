@@ -59,8 +59,8 @@
           {{ iwlwifimvmfirmware }},
           {{ iwlwifidvmfirmware }},
           {{ icedteaweb }},
-          default-fonts,
-          default-fonts-core,
+          {{ defaultfonts }},
+          {{ defaultfontscore }},
           fzf,
           bat,
           fd-find
