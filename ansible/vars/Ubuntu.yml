@@ -1,2 +1,3 @@
 # for vars/Ubuntu.yml
 mtp: libmtp-common
+andorid-tools: adb

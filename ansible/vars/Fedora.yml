@@ -1,3 +1,4 @@
 # for vars/Fedora.yml
 chromium: chromium
 mtp: gvfs-mtp
+android-tools: adb
