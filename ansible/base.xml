@@ -46,7 +46,7 @@
           lame,
           {{  id3lib }},
           mp3gain,
-          {{ alsa-sof-firmware }},
+          {{ 'alsa-sof-firmware' }},
           pavucontrol,
           pulseaudio-utils,
           intel-audio-firmware,
