@@ -22,9 +22,9 @@
         url: https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
         dest: /usr/share/keyrings/brave-browser-archive-keyring.gpg 
 
-    - name: Add eternal terminal repository from PPA and install its signing key on Ubuntu target
-      apt_repository:
-        repo: ppa:jgmath2000/et
+#     - name: Add eternal terminal repository from PPA and install its signing key on Ubuntu target
+#       apt_repository:
+#         repo: ppa:jgmath2000/et
 
     - name: add prompt script
       copy:
