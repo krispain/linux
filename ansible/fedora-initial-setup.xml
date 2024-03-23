@@ -89,6 +89,11 @@
         group: root
         mode: 0644
 
+    - name: Install NFS tools
+      package:
+        name: "nfs-utils"
+        state: latest
+
     - name: Mount home NFS volumes with noauto according to boot option
       ansible.posix.mount:
         src: 172.16.1.74:/nfs/WDNFS
