@@ -49,7 +49,7 @@
           {{ alsasoffirmware }},
           pavucontrol,
           pulseaudio-utils,
-          intel-audio-firmware,
+          {{ intelaudiofirmware }},
           gnome-tweaks,
           protonvpn,
           qbittorrent,

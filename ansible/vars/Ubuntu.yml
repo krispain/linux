@@ -5,3 +5,4 @@ vncviewer: gvncviewer
 glxinfo: mesa-utils
 id3lib: libid3-tools
 alsasoffirmware: firmware-sof-signed
+intelaudiofirmware: firmware-sof-signed
