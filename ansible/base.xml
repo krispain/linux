@@ -24,7 +24,7 @@
           htop,
           ncdu,
           {{ android }},
-          tigervnc,
+          {{ vncviewer }},
           docker-compose,
           virt-manager,
           mosh,
