@@ -23,7 +23,7 @@
           neofetch,
           htop,
           ncdu,
-          {{ android-tools }},
+          {{ android }},
           tigervnc,
           docker-compose,
           virt-manager,
