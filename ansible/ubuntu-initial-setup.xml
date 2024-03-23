@@ -11,16 +11,16 @@
         name: "*"
         state: latest
 
-    - name: Adding Brave browser repo
-      apt_repository: 
-        repo: "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"
-        state: present
-
     - name: Importing Brave browser key
       become: yes
       get_url: 
         url: https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
         dest: /usr/share/keyrings/brave-browser-archive-keyring.gpg 
+
+    - name: Adding Brave browser repo
+      apt_repository: 
+        repo: "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"
+        state: present
 
 #     - name: Add eternal terminal repository from PPA and install its signing key on Ubuntu target
 #       apt_repository:
