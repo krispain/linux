@@ -30,6 +30,11 @@
       apt:
         deb: https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.3-2_all.deb
 
+    - name: Update all repositories
+      apt:
+        update_cache: yes
+        cache_valid_time: 86400 
+
     - name: add prompt script
       copy:
         src: prompt.sh
