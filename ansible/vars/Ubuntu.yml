@@ -2,3 +2,4 @@
 mtp: libmtp-common
 android: adb
 vncviewer: gvncviewer
+glxinfo: mesa-utils

@@ -3,3 +3,4 @@ chromium: chromium
 mtp: gvfs-mtp
 android: android-tools
 vncviewer: tigervnc
+glxinfo: glxinfo

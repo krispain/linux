@@ -32,7 +32,7 @@
           nmap,
           meld,
           openvpn,
-          glxinfo,
+          {{ glxinfo }},
           gparted,
           gimp,
           mate-utils,
