@@ -9,3 +9,4 @@ intelaudiofirmware: firmware-sof-signed
 nextcloudclientnautilus: nextcloud-desktop
 iwlwifimvmfirmware: linux-modules-iwlwifi-generic
 iwlwifidvmfirmware: linux-modules-iwlwifi-generic
+icedteaweb: icedtea-netx

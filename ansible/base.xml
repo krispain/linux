@@ -58,7 +58,7 @@
           {{ nextcloudclientnautilus }},
           {{ iwlwifimvmfirmware }},
           {{ iwlwifidvmfirmware }},
-          icedtea-web,
+          {{ icedteaweb }},
           default-fonts,
           default-fonts-core,
           fzf,
