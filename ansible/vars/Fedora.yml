@@ -7,7 +7,7 @@ glxinfo: glxinfo
 id3lib: id3lib
 alsasoffirmware: alsa-sof-firmware
 intelaudiofirmware: intel-audio-firmware
-gnomeflashback: gnome-flashback
+gnomeflashback: 'gnome-flashback gnome-session'
 nextcloudclientnautilus: nextcloud-client-nautilus
 iwlwifimvmfirmware: iwlwifi-mvm-firmware
 iwlwifidvmfirmware: iwlwifi-dvm-firmware
