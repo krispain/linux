@@ -53,7 +53,7 @@
           gnome-tweaks,
           protonvpn,
           qbittorrent,
-          gnome-flashback,
+          {{ gnomeflashback }},
           lightdm,
           {{ nextcloudclientnautilus }},
           {{ iwlwifimvmfirmware }},
