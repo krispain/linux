@@ -2,6 +2,7 @@
 - hosts: localhost
   vars_files:
     - [ "vars/{{ ansible_facts['distribution'] }}.yml"]
+    - [ "vars/flatpaks.yml"]
 
   tasks:
     - name: Install some packages
