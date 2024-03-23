@@ -5,4 +5,4 @@ android: android-tools
 vncviewer: tigervnc
 glxinfo: glxinfo
 id3lib: id3lib
-alsa-sof-firmware: alsa-sof-firmware
+alsasoffirmware: alsa-sof-firmware

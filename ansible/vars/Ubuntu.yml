@@ -4,4 +4,4 @@ android: adb
 vncviewer: gvncviewer
 glxinfo: mesa-utils
 id3lib: libid3-tools
-alsa-sof-firmware: firmware-sof-signed
+alsasoffirmware: firmware-sof-signed
