@@ -26,7 +26,7 @@
 #       apt_repository:
 #         repo: ppa:jgmath2000/et
 
-    - name Install protonvpn repository
+    - name: Install protonvpn repository
       apt:
         deb: https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.3-2_all.deb
 
