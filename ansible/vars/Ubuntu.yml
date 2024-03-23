@@ -3,3 +3,4 @@ mtp: libmtp-common
 android: adb
 vncviewer: gvncviewer
 glxinfo: mesa-utils
+id3lib: libid3-tools

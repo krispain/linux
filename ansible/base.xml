@@ -44,7 +44,7 @@
           yt-dlp,
           id3v2,
           lame,
-          id3lib,
+          {{  id3lib }},
           mp3gain,
           alsa-sof-firmware,
           pavucontrol,

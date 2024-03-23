@@ -4,3 +4,4 @@ mtp: gvfs-mtp
 android: android-tools
 vncviewer: tigervnc
 glxinfo: glxinfo
+id3lib: id3lib
