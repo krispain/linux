@@ -67,12 +67,7 @@
 
     - name: Install flatpak packages
       community.general.flatpak:
-        name:
-          - com.slack.Slack
-          - com.authy.Authy
-          - com.bitwarden.desktop
-          - org.signal.Signal
-          - org.telegram.desktop
+        name: "{{ flathub_packages }}"
 
     - name: Install linphone appimage
       ansible.builtin.get_url:

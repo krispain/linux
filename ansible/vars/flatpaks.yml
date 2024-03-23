@@ -1,0 +1,7 @@
+# community.general.flatpak doesn't like the list
+flathub_packages:
+  - com.slack.Slack
+  - com.authy.Authy
+  - com.bitwarden.desktop
+  - org.signal.Signal
+  - org.telegram.desktop
