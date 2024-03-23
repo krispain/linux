@@ -55,7 +55,7 @@
           qbittorrent,
           gnome-flashback,
           lightdm,
-          nextcloud-client-nautilus,
+          {{ nextcloudx-clientnautilus }},
           iwlwifi-mvm-firmware,
           iwlwifi-dvm-firmware,
           icedtea-web,
