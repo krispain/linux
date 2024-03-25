@@ -24,6 +24,7 @@
           neofetch,
           htop,
           ncdu,
+          et,
           {{ android }},
           {{ vncviewer }},
           docker-compose,
