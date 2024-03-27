@@ -2,14 +2,22 @@
 - hosts: localhost
 
   tasks:
-    - name: Update all pacakges
+    - name: Update all pacakges - Fedora
       package:
+        name: "*"
+        state: latest
+      register: result
+      when: ansible_distribution == "Fedora"
+
+    - name: Update all pacakges - Ubuntu
+      apt:
         name: "*"
         state: latest
         update_cache: yes
       register: result
+      when: ansible_distribution == "Ubuntu"
+
     - name: Show updated packages
-      when: result is changed
       debug: msg="{{ result.results }}"
 
     - name: Upgrade all flatpaks
