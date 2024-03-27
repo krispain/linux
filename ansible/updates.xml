@@ -6,6 +6,7 @@
       package:
         name: "*"
         state: latest
+        update_cache: yes
       register: result
     - name: Show updated packages
       when: result is changed
