@@ -14,9 +14,9 @@
 
     - name: Update all pacakges - Ubuntu
       apt:
-        name: "*"
-        state: latest
+        upgrade: yes
         update_cache: yes
+	cache_valid_time: 7200
       register: result
       when: ansible_distribution == "Ubuntu"
     - name: Show updated packages
