@@ -14,7 +14,7 @@
 
     - name: Update all pacakges - Ubuntu
       apt:
-        upgrade: dist
+        upgrade: 'yes'
         update_cache: yes
         cache_valid_time: 7200
       register: result
