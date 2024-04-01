@@ -66,16 +66,11 @@
 
     - name: Install flatpak package Slack
       community.general.flatpak:
-        name: com.slack.Slack
-    - name: Install flatpak package bitwarden
-      community.general.flatpak:
-        name: com.bitwarden.desktop
-    - name: Install flatpak package Signal
-      community.general.flatpak:
-        name: org.signal.Signal
-    - name: Install flatpak package telegram
-      community.general.flatpak:
-        name: org.telegram.desktop
+        name:
+          - com.slack.Slack
+          - com.bitwarden.desktop
+          - org.signal.Signal
+          - org.telegram.desktop
 
     - name: Install linphone appimage
       ansible.builtin.get_url:
