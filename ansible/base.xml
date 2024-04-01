@@ -65,7 +65,7 @@
 
     - name: Install Cinnamon Group
       ansible.builtin.dnf:
-        name '@Cinnamon'
+        name: '@Cinnamon'
         state: present
 
     - name: Install flatpak package Slack
