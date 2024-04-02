@@ -61,7 +61,9 @@
           {{ defaultfontscore }},
           fzf,
           bat,
-          fd-find
+          fd-find,
+          vim-X11,
+          vim-syntastic-ansible.noarch
 
     - name: Install Cinnamon Group
       ansible.builtin.dnf:
